@@ -1,5 +1,5 @@
 # Reservation-salle Alma SCDI
-**Reservation-salle Alma SCDI** est une application écrite en PHP/JS/CSS qui permet de visualiser les plannings de disponibilité et de réserver des salles de travail déclarées l'application Alma Exlibris.
+**Reservation-salle Alma SCDI** est une application écrite en PHP/JS/CSS qui permet de visualiser les plannings de disponibilité et de réserver des salles de travail déclarées dans l'application Alma Exlibris.
 
 ## Fonctionnement de l'application
 L'utilisateur consulte le planning des disponibilités des salles inscrites dans l'application. Il sélectionne les créneaux disponibles qu'il veut réserver.
@@ -54,4 +54,4 @@ Aucun support n'est assuré pour le moment par le SCDI de Montpellier mais si vo
 
 - Visualisation des plannings :
   
-![Après authentification](https://reservation-salle.scdi-montpellier.fr/capture/2.png)
+![Visualisation](https://reservation-salle.scdi-montpellier.fr/capture/2.png)
