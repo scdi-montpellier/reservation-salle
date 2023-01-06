@@ -49,9 +49,7 @@ Aucun support n'est assuré pour le moment par le SCDI de Montpellier mais si vo
 
 ## Captures
 - Accueil / choix bibliothèque :
-  
-![Accueil](https://reservation-salle.scdi-montpellier.fr/capture/1.png)
+https://reservation-salle.scdi-montpellier.fr/capture/1.png
 
 - Visualisation des plannings :
-  
-![Visualisation-planning](https://reservation-salle.scdi-montpellier.fr/capture/2.png)
+https://reservation-salle.scdi-montpellier.fr/capture/2.png
