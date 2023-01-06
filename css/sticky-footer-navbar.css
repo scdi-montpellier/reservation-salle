@@ -1,0 +1,173 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 70px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 70px;
+  line-height: 70px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 5px 15px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+.titre1 {
+	font-weight:bold;
+}
+
+.titre2 {
+	font-weight:bold;
+}
+
+ul {
+  /*margin-bottom:0;
+  padding-bottom: 0;*/
+  margin:0;
+  padding: 0;
+}
+
+li {
+
+  margin: 0;
+  margin-left:7px;
+  padding: 0;
+}
+
+.dropdown span
+{
+	cursor:pointer;
+}
+.dropdown span:hover
+{
+	cursor:pointer;
+}
+
+#jour_ouverture {
+	margin-top : 10px;
+}
+
+#disponibilite {
+	margin-top : 10px;
+}
+
+.creneaudispo {
+	cursor:pointer;
+	background-color:#28a745;
+}
+.creneaudispo:hover {
+	cursor:pointer;
+	background-color:#1e7e34;
+}
+
+.creneauindispo {
+	cursor:not-allowed;
+	background-color:#dd182b;
+}
+.creneauindispo:hover {
+	cursor:not-allowed;
+	background-color:#dd182b;
+}
+
+.creneauindispofermeture {
+	cursor:not-allowed;
+	background-color:#838483;
+}
+.creneauindispofermeture:hover {
+	cursor:not-allowed;
+	background-color:#838483;
+}
+
+.creneauindispoinf {
+	cursor:not-allowed;
+	background: rgb(255,105,120);
+	background: linear-gradient(90deg, rgba(255,105,120,1) 2%, rgba(221,24,43,1) 11%);
+}
+.creneauindispoinf:hover {
+	cursor:not-allowed;
+	background: rgb(255,105,120);
+	background: linear-gradient(90deg, rgba(255,105,120,1) 2%, rgba(221,24,43,1) 11%);
+}
+
+.creneauindisposup {
+	cursor:not-allowed;
+	background: rgb(221,24,43);
+	background: linear-gradient(90deg, rgba(221,24,43,1) 89%, rgba(255,105,120,1) 98%);
+	border-right: 1px solid white;
+}
+.creneauindisposup:hover {
+	cursor:not-allowed;
+	background: rgb(221,24,43);
+	background: linear-gradient(90deg, rgba(221,24,43,1) 89%, rgba(255,105,120,1) 98%);
+	border-right: 1px solid white;
+}
+
+.creneauindispoinfsup {
+	cursor:not-allowed;
+	background: rgb(255,105,120);
+	background: linear-gradient(90deg, rgba(255,105,120,1) 2%, rgba(221,24,43,1) 11%, rgba(221,24,43,1) 89%, rgba(255,105,120,1) 98%);
+}
+.creneauindispoinfsup:hover {
+	cursor:not-allowed;
+	background: rgb(255,105,120);
+	background: linear-gradient(90deg, rgba(255,105,120,1) 2%, rgba(221,24,43,1) 11%, rgba(221,24,43,1) 89%, rgba(255,105,120,1) 98%);
+}
+
+.creneauchoisi {
+	cursor:pointer;
+	background-color:#ffc107;
+}
+.creneauchoisi:hover {
+	cursor:pointer;
+	background-color:#cd9b04;
+}
+
+.btn_description:hover {
+	cursor:pointer;
+}
+
+#btn_compris:hover {
+	cursor:pointer;
+}
+#label_compris:hover {
+	cursor:pointer;
+}
+
+#btn_verifier:hover {
+	cursor:pointer;
+}
+#label_verifier:hover {
+	cursor:pointer;
+}
+
+#btn_precedent:hover {
+	cursor:pointer;
+}
+
+#btn_suivant:hover {
+	cursor:pointer;
+}

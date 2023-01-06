@@ -1,0 +1,370 @@
+{
+	"MBUD": {
+		"id": "MBUD",
+		"nom": "BU Richter",
+		"campus": "um",
+		"creneau_min": "2",
+		"creneau_max": "6",
+		"url_description": "https://bibliotheques.edu.umontpellier.fr/les-bibliotheques-universitaires/bu-richter-droit-sciences-economiques-science-politique-gestion/",
+		"fermeture_specifique": [{
+			"debut": "2022/12/19",
+			"fin": "2023/01/02",
+			"raison": "Fermeture pour les vacances de Noël"
+		}],
+		"horaire_specifique": [
+		{
+			"debut": "2023/07/03",
+			"fin": "2023/07/22",
+			"ouverture": "09:00:00",
+			"fermeture": "16:00:00"
+		}],
+		"horaire": {
+			"j1": {
+				"ouvert": 1,
+				"ouverture": "08:00:00",
+				"fermeture": "21:00:00",
+				"reservable": 1
+			},
+			"j2": {
+				"ouvert": 1,
+				"ouverture": "08:00:00",
+				"fermeture": "21:00:00",
+				"reservable": 1
+			},
+			"j3": {
+				"ouvert": 1,
+				"ouverture": "08:00:00",
+				"fermeture": "21:00:00",
+				"reservable": 1
+			},
+			"j4": {
+				"ouvert": 1,
+				"ouverture": "08:00:00",
+				"fermeture": "21:00:00",
+				"reservable": 1
+			},
+			"j5": {
+				"ouvert": 1,
+				"ouverture": "08:00:00",
+				"fermeture": "21:00:00",
+				"reservable": 1
+			},
+			"j6": {
+				"ouvert": 1,
+				"ouverture": "09:00:00",
+				"fermeture": "19:00:00",
+				"reservable": 1
+			},
+			"j7": {
+				"ouvert": 0,
+				"raison": "La BU est fermée le dimanche"
+			}
+		},
+		"mmsid": {
+			"9928520768504231": {
+				"id": "9928520768504231",
+				"holdingid": {
+					"22340827230004231": {
+						"id": "22340827230004231",
+						"itemid": {
+							"23340827210004231": {
+								"id": "23340827210004231",
+								"cb": "0MPD0328344",
+								"nom": "Salle 2HC",
+								"categorie": "3-8 personnes",
+								"description": "3 personnes minimum, 8 personnes maximum",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827220004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%202HC&offset=0"
+							}
+						}
+					}
+				}
+			},
+			"9928474270404231": {
+				"id": "9928474270404231",
+				"holdingid": {
+					"22335949880004231": {
+						"id": "22335949880004231",
+						"itemid": {
+							"23335949860004231": {
+								"id": "23335949860004231",
+								"cb": "0MPD0328345",
+								"nom": "Salle 2HB",
+								"categorie": "3-8 personnes",
+								"description": "3 personnes minimum, 8 personnes maximum",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21335949890004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%202HB&offset=0"
+							}
+						}
+					}
+				}
+			},
+			"9928507168404231": {
+				"id": "9928507168404231",
+				"holdingid": {
+					"22338708770004231": {
+						"id": "22338708770004231",
+						"itemid": {
+							"23338708750004231": {
+								"id": "23338708750004231",
+								"cb": "0MPD0328514",
+								"nom": "Espace PMR ",
+								"categorie": "Réservé PMR",
+								"description": "Réservé aux étudiants en situation de handicap uniquement",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21338708760004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Espace%20PMR&offset=0"
+							}
+						}
+					}
+				}
+			},
+			"9928507168504231": {
+				"id": "9928507168504231",
+				"holdingid": {
+					"22338708840004231": {
+						"id": "22338708840004231",
+						"itemid": {
+							"23338708820004231": {
+								"id": "23338708820004231",
+								"cb": "0MPD0328509",
+								"nom": "Îlot 1 (salle de formation)",
+								"categorie": "3-5 personnes",
+								"description": "3 personnes minimum, 5 personnes maximum",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21338708830004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%201%20salle%20de%20formation&offset=0"
+							}
+						}
+					}
+				}
+			},
+			"9928520768404231": {
+				"id": "9928520768404231",
+				"holdingid": {
+					"22340827190004231": {
+						"id": "22340827190004231",
+						"itemid": {
+							"23340827080004231": {
+								"id": "23340827080004231",
+								"cb": "0MPD0328510",
+								"nom": "Îlot 2 (salle de formation)",
+								"categorie": "3-5 personnes",
+								"description": "3 personnes minimum, 5 personnes maximum",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827180004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%202%20salle%20de%20formation&offset=0"
+							}
+						}
+					}
+				}
+			},
+			"9928520768104231": {
+				"id": "9928520768104231",
+				"holdingid": {
+					"22340827070004231": {
+						"id": "22340827070004231",
+						"itemid": {
+							"23340827050004231": {
+								"id": "23340827050004231",
+								"cb": "0MPD0328511",
+								"nom": "Îlot 3 (salle de formation)",
+								"categorie": "3-5 personnes",
+								"description": "3 personnes minimum, 5 personnes maximum",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827060004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%203%20salle%20de%20formation&offset=0"
+							}
+						}
+					}
+				}
+			},
+			"9928520768304231": {
+				"id": "9928520768304231",
+				"holdingid": {
+					"22340827140004231": {
+						"id": "22340827140004231",
+						"itemid": {
+							"23340827040004231": {
+								"id": "23340827040004231",
+								"cb": "0MPD0328512",
+								"nom": "Îlot 4 (salle de formation)",
+								"categorie": "3-5 personnes",
+								"description": "3 personnes minimum, 5 personnes maximum",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827160004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%204%20salle%20de%20formation&offset=0"
+							}
+						}
+					}
+				}
+			},
+			"9928520768204231": {
+				"id": "9928520768204231",
+				"holdingid": {
+					"22340827090004231": {
+						"id": "22340827090004231",
+						"itemid": {
+							"23340827030004231": {
+								"id": "23340827030004231",
+								"cb": "0MPD0328513",
+								"nom": "Îlot 5 (salle de formation)",
+								"categorie": "3-5 personnes",
+								"description": "3 personnes minimum, 5 personnes maximum",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827110004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%205%20salle%20de%20formation&offset=0"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"MBUS": {
+		"id": "MBUS",
+		"nom": "BU Sciences",
+		"campus": "um",
+		"creneau_min": "2",
+		"creneau_max": "8",
+		"url_description": "https://bibliotheques.edu.umontpellier.fr/les-bibliotheques-universitaires/bu-sciences-et-techniques/",
+		"fermeture_specifique": [{
+				"debut": "2022/12/25",
+				"fin": "2022/12/25",
+				"raison": "La BU est fermée (férié)"
+			},
+			{
+				"debut": "2023/01/01",
+				"fin": "2023/01/01",
+				"raison": "La BU est fermée (férié)"
+			},
+			{
+				"debut": "2022/12/23",
+				"fin": "2022/12/31",
+				"raison": "Fermeture pour congés de Noël"
+			}
+		],
+		"horaire_specifique": [],
+		"horaire": {
+			"j1": {
+				"ouvert": 1,
+				"ouverture": "08:00:00",
+				"fermeture": "22:30:00",
+				"reservable": 1
+			},
+			"j2": {
+				"ouvert": 1,
+				"ouverture": "08:00:00",
+				"fermeture": "22:30:00",
+				"reservable": 1
+			},
+			"j3": {
+				"ouvert": 1,
+				"ouverture": "08:00:00",
+				"fermeture": "22:30:00",
+				"reservable": 1
+			},
+			"j4": {
+				"ouvert": 1,
+				"ouverture": "08:00:00",
+				"fermeture": "22:30:00",
+				"reservable": 1
+			},
+			"j5": {
+				"ouvert": 1,
+				"ouverture": "08:00:00",
+				"fermeture": "22:30:00",
+				"reservable": 1
+			},
+			"j6": {
+				"ouvert": 0,
+				"raison": "La BU est fermée le samedi"
+			},
+			"j7": {
+				"ouvert": 1,
+				"ouverture": "10:00:00",
+				"fermeture": "19:00:00",
+				"reservable": 0,
+				"raison": "La BU est ouverte le dimanche (de 10:00 à 19:00), mais les salles de la BU ne sont pas réservables"
+			}
+		},
+		"mmsid": {
+			"990006611190304231": {
+				"id": "990006611190304231",
+				"holdingid": {
+					"22285502580004231": {
+						"id": "22285502580004231",
+						"itemid": {
+							"23319779030004231": {
+								"id": "23319779030004231",
+								"cb": "0MPS0307163",
+								"nom": "Salle Kepler",
+								"categorie": "3-6 personnes",
+								"description": "3 personnes minimum (présentez-vous à 3 personnes minimum au moment de récupérer la clé), 6 personnes maximum,<br/>Réservation réservée aux étudiants et employés de l'UM et de l'UPVM3,<br/>Non accessible PMR,<br/>Mezzanine de la BU Sciences, petite salle",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21285502590004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%20Kepler&offset=0"
+							}
+						}
+					}
+				}
+			},
+			"9928512670104231": {
+				"id": "9928512670104231",
+				"holdingid": {
+					"22339679660004231": {
+						"id": "22339679660004231",
+						"itemid": {
+							"23319779020004231": {
+								"id": "23319779020004231",
+								"cb": "0MPS0307164",
+								"nom": "Salle Jackson",
+								"categorie": "3 personnes",
+								"description": "3 personnes (présentez-vous à 3 personnes au moment de récupérer la clé),<br/>Réservation réservée aux étudiants et employés de l'UM et de l'UPVM3,<br/>Non accessible PMR,<br/>Mezzanine de la BU Sciences, grande salle",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21339679640004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%20Jackson&offset=0"
+							}
+						}
+					}
+				}
+			},
+			"9928512670304231": {
+				"id": "9928512670304231",
+				"holdingid": {
+					"22339679680004231": {
+						"id": "22339679680004231",
+						"itemid": {
+							"23319779010004231": {
+								"id": "23319779010004231",
+								"cb": "0MPS0307161",
+								"nom": "Salle Mendeleiev",
+								"categorie": "3 personnes",
+								"description": "3 personnes (présentez-vous à 3 personnes au moment de récupérer la clé),<br/>Réservation réservée aux étudiants et employés de l'UM et de l'UPVM3,<br/>Non accessible PMR,<br/>Mezzanine de la BU Sciences, grande salle",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21339679670004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%20Mendeleiev&offset=0"
+							}
+						}
+					}
+				}
+			},
+			"9928512670204231": {
+				"id": "9928512670204231",
+				"holdingid": {
+					"22339679600004231": {
+						"id": "22339679600004231",
+						"itemid": {
+							"23319779000004231": {
+								"id": "23319779000004231",
+								"cb": "0MPS0307160",
+								"nom": "Salle Newton",
+								"categorie": "2 personnes",
+								"description": "2 personnes (présentez-vous à 2 personnes au moment de récupérer la clé),<br/>Réservation réservée aux étudiants et employés de l'UM et de l'UPVM3,<br/>Non accessible PMR,<br/>Mezzanine de la BU Sciences, petite salle",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21339679590004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%20Newton&offset=0"
+							}
+						}
+					}
+				}
+			},
+			"9928512670404231": {
+				"id": "9928512670404231",
+				"holdingid": {
+					"22339679560004231": {
+						"id": "22339679560004231",
+						"itemid": {
+							"23319778990004231": {
+								"id": "23319778990004231",
+								"cb": "0MPS0307162",
+								"nom": "Salle Lavoisier",
+								"categorie": "2 personnes",
+								"description": "2 personnes (présentez-vous à 2 personnes au moment de récupérer la clé),<br/>Réservation réservée aux étudiants et employés de l'UM et de l'UPVM3,<br/>Non accessible PMR,<br/>Mezzanine de la BU Sciences, petite salle",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21339679550004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%20Lavoisier&offset=0"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
