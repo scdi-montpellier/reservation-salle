@@ -69,7 +69,6 @@
     <!-- Begin page content -->
     <?php
 	 echo "<main role='main' class='container'>";
-        echo "<div id='div_session_write'> </div>";
 		
 		echo "<div id='div_header' class='border border rounded shadow-sm' style=\"padding:10px;background-image: url('images/fond.jpg');background-repeat: no-repeat;background-origin: border-box;background-position: right 50% top 40%;\">";
 		

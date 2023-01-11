@@ -51,12 +51,12 @@
 	$gLogo['um']['urllogo'] = "images/logo-um.png";
 	$gLogo['um']['urlsiteinstitutionel'] = "https://www.umontpellier.fr/";
 	$gLogo['um']['textelien'] = "Site de l'Université Montpellier";
-	$gLogo['um']['logovisible'] = 1;								
+	$gLogo['um']['logovisible'] = 1;
 	
 	$gLogo['enscm']['urllogo'] = "images/logo-um.png";
 	$gLogo['enscm']['urlsiteinstitutionel'] = "https://www.umontpellier.fr/";
 	$gLogo['enscm']['textelien'] = "Site de l'Université Montpellier";
-	$gLogo['enscm']['logovisible'] = 0;	 								
+	$gLogo['enscm']['logovisible'] = 0;
 	
 	// Nom du SP dans simplesamlphp
 	$gNomSP = "reservation-salle-scdi";

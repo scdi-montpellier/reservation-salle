@@ -154,6 +154,7 @@
 		$message .= "     		filtre='';";
 		$message .= "     	else";
 		$message .= "     		filtre=$('#dropdown_critere_salle').data('valeur');";
+		// $message .= "     alert(filtre);";
 		$message .= "     disponibilite_bu('$codebu', '".$bu[$codebu]['nom']."', $(this).data('date'), 1, filtre);";
 		$message .= "	$(this).tab('show');";
 		$message .= "	$(this).tooltip('hide');";

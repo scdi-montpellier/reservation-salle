@@ -71,8 +71,13 @@
 								"id": "23340827210004231",
 								"cb": "0MPD0328344",
 								"nom": "Salle 2HC",
-								"categorie": "3-8 personnes",
-								"description": "3 personnes minimum, 8 personnes maximum",
+								"filtre": {
+									"Nom": "Salle 2HC",
+									"Capacité": "3-8 personnes",
+									"Localisation": "Étage 2H",
+									"Réservé PMR": "Non"
+								},
+								"description": "Salle de travail en groupe climatisée au 2e étage, équipée d'un écran de partage et d'un tableau blanc. Prêt d'un câble de liaison et de 2 feutres. Capacité de 3 à 8 personnes",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827220004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%202HC&offset=0"
 							}
 						}
@@ -89,8 +94,13 @@
 								"id": "23335949860004231",
 								"cb": "0MPD0328345",
 								"nom": "Salle 2HB",
-								"categorie": "3-8 personnes",
-								"description": "3 personnes minimum, 8 personnes maximum",
+								"filtre": {
+									"Nom": "Salle 2HB",
+									"Capacité": "3-8 personnes",
+									"Localisation": "Étage 2H",
+									"Réservé PMR": "Non"
+								},
+								"description": "Salle de travail en groupe climatisée au 2e étage, équipée d'un écran de partage et d'un tableau blanc. Prêt d'un câble de liaison et de 2 feutres. Capacité de 3 à 8 personnes",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21335949890004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%202HB&offset=0"
 							}
 						}
@@ -106,8 +116,11 @@
 							"23338708750004231": {
 								"id": "23338708750004231",
 								"cb": "0MPD0328514",
-								"nom": "Espace PMR ",
-								"categorie": "Réservé PMR",
+								"nom": "Espace PMR",
+								"filtre": {
+									"Nom": "Espace PMR",
+									"Réservé PMR": "Oui"
+								},
 								"description": "Réservé aux étudiants en situation de handicap uniquement",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21338708760004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Espace%20PMR&offset=0"
 							}
@@ -125,7 +138,11 @@
 								"id": "23338708820004231",
 								"cb": "0MPD0328509",
 								"nom": "Îlot 1 (salle de formation)",
-								"categorie": "3-5 personnes",
+								"filtre": {
+									"Nom": "Ilôt",
+									"Capacité": "3-5 personnes",
+									"Réservé PMR": "Non"
+								},
 								"description": "3 personnes minimum, 5 personnes maximum",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21338708830004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%201%20salle%20de%20formation&offset=0"
 							}
@@ -143,7 +160,11 @@
 								"id": "23340827080004231",
 								"cb": "0MPD0328510",
 								"nom": "Îlot 2 (salle de formation)",
-								"categorie": "3-5 personnes",
+								"filtre": {
+									"Nom": "Ilôt",
+									"Capacité": "3-5 personnes",
+									"Réservé PMR": "Non"
+								},
 								"description": "3 personnes minimum, 5 personnes maximum",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827180004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%202%20salle%20de%20formation&offset=0"
 							}
@@ -161,7 +182,11 @@
 								"id": "23340827050004231",
 								"cb": "0MPD0328511",
 								"nom": "Îlot 3 (salle de formation)",
-								"categorie": "3-5 personnes",
+								"filtre": {
+									"Nom": "Ilôt",
+									"Capacité": "3-5 personnes",
+									"Réservé PMR": "Non"
+								},
 								"description": "3 personnes minimum, 5 personnes maximum",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827060004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%203%20salle%20de%20formation&offset=0"
 							}
@@ -179,7 +204,11 @@
 								"id": "23340827040004231",
 								"cb": "0MPD0328512",
 								"nom": "Îlot 4 (salle de formation)",
-								"categorie": "3-5 personnes",
+								"filtre": {
+									"Nom": "Ilôt",
+									"Capacité": "3-5 personnes",
+									"Réservé PMR": "Non"
+								},
 								"description": "3 personnes minimum, 5 personnes maximum",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827160004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%204%20salle%20de%20formation&offset=0"
 							}
@@ -197,7 +226,11 @@
 								"id": "23340827030004231",
 								"cb": "0MPD0328513",
 								"nom": "Îlot 5 (salle de formation)",
-								"categorie": "3-5 personnes",
+								"filtre": {
+									"Nom": "Ilôt",
+									"Capacité": "3-5 personnes",
+									"Réservé PMR": "Non"
+								},
 								"description": "3 personnes minimum, 5 personnes maximum",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827110004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%205%20salle%20de%20formation&offset=0"
 							}
@@ -285,7 +318,11 @@
 								"id": "23319779030004231",
 								"cb": "0MPS0307163",
 								"nom": "Salle Kepler",
-								"categorie": "3-6 personnes",
+								"filtre": {
+									"Nom": "Salle Kepler",
+									"Capacité": "3-6 personnes",
+									"Localisation": "Mezzanine"
+								},
 								"description": "3 personnes minimum (présentez-vous à 3 personnes minimum au moment de récupérer la clé), 6 personnes maximum,<br/>Réservation réservée aux étudiants et employés de l'UM et de l'UPVM3,<br/>Non accessible PMR,<br/>Mezzanine de la BU Sciences, petite salle",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21285502590004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%20Kepler&offset=0"
 							}
@@ -303,7 +340,11 @@
 								"id": "23319779020004231",
 								"cb": "0MPS0307164",
 								"nom": "Salle Jackson",
-								"categorie": "3 personnes",
+								"filtre": {
+									"Nom": "Salle Jackson",
+									"Capacité": "3 personnes",
+									"Localisation": "Mezzanine"
+								},
 								"description": "3 personnes (présentez-vous à 3 personnes au moment de récupérer la clé),<br/>Réservation réservée aux étudiants et employés de l'UM et de l'UPVM3,<br/>Non accessible PMR,<br/>Mezzanine de la BU Sciences, grande salle",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21339679640004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%20Jackson&offset=0"
 							}
@@ -321,7 +362,11 @@
 								"id": "23319779010004231",
 								"cb": "0MPS0307161",
 								"nom": "Salle Mendeleiev",
-								"categorie": "3 personnes",
+								"filtre": {
+									"Nom": "Salle Mendeleiev",
+									"Capacité": "3 personnes",
+									"Localisation": "Mezzanine"
+								},
 								"description": "3 personnes (présentez-vous à 3 personnes au moment de récupérer la clé),<br/>Réservation réservée aux étudiants et employés de l'UM et de l'UPVM3,<br/>Non accessible PMR,<br/>Mezzanine de la BU Sciences, grande salle",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21339679670004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%20Mendeleiev&offset=0"
 							}
@@ -339,7 +384,11 @@
 								"id": "23319779000004231",
 								"cb": "0MPS0307160",
 								"nom": "Salle Newton",
-								"categorie": "2 personnes",
+								"filtre": {
+									"Nom": "Salle Newton",
+									"Capacité": "2 personnes",
+									"Localisation": "Mezzanine"
+								},
 								"description": "2 personnes (présentez-vous à 2 personnes au moment de récupérer la clé),<br/>Réservation réservée aux étudiants et employés de l'UM et de l'UPVM3,<br/>Non accessible PMR,<br/>Mezzanine de la BU Sciences, petite salle",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21339679590004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%20Newton&offset=0"
 							}
@@ -357,7 +406,11 @@
 								"id": "23319778990004231",
 								"cb": "0MPS0307162",
 								"nom": "Salle Lavoisier",
-								"categorie": "2 personnes",
+								"filtre": {
+									"Nom": "Salle Lavoisier",
+									"Capacité": "2 personnes",
+									"Localisation": "Mezzanine"
+								},
 								"description": "2 personnes (présentez-vous à 2 personnes au moment de récupérer la clé),<br/>Réservation réservée aux étudiants et employés de l'UM et de l'UPVM3,<br/>Non accessible PMR,<br/>Mezzanine de la BU Sciences, petite salle",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21339679550004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%20Lavoisier&offset=0"
 							}

@@ -18,7 +18,13 @@ if (isset($_GET['variable']) && isset($_GET['valeur']) )
 	if (substr($name,0,strlen("info")) == "info")
 		$_SESSION["$name"] = $valeur ;
 	
+	$reponse = "OK";
 	// var_dump($_SESSION);
 }
+else
+	$reponse = "KO";
 
+$array['reponse'] = $reponse;
+	
+echo json_encode($array);
 ?>
