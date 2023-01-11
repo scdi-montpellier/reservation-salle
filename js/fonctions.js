@@ -394,9 +394,53 @@ function alertpopup(id, couleur, message)
 	});
 }
 
+function session_write_variable(id,valeur)
+{
+	$('#disponibilite_attente_message').html("<div class='badge badge-light'><i class='fa fa-cog fa-spin' aria-hidden='true'></i> Modification</div>");
+		
+		$.ajax({
+		url: "session_write.php", 
+		data: "variable=" + id +"&valeur="+valeur,
+		type: "GET", 
+		dataType: 'json',
+		success: function(json) {
+			
+			switch (json.reponse)
+			{
+				case "OK":
+					$('#disponibilite_attente_message').html("<div class='badge badge-light'><i class='fa fa-check text-success' aria-hidden='true'></i> Modification terminée</div>");
+				break;
+								
+				case "KO":
+					$('#disponibilite_attente_message').html("<div class='badge badge-light'><i class='fa fa-exclamation-triangle text-danger' aria-hidden='true'></i> Erreur lors de la modification</div>");
+				break;
+
+				default:
+					
+
+			}
+			
+		},
+		beforeSend: function(){
+			// debut animation pendant envoi
+			$('#disponibilite_attente_message').html("<div class='badge badge-light'><i class='fa fa-cog fa-spin' aria-hidden='true'></i> Modification</div>");
+		},
+		complete: function(){
+			// fin animation pendant envoi
+		},
+		error: function(){
+			// fin animation pendant envoi
+			$('#disponibilite_attente_message').html("<div class='badge badge-light'><i class='fa fa-exclamation-triangle text-danger' aria-hidden='true'></i> Erreur inconnue lors de la modification</div>");
+		}
+	
+		});
+}
+
 function masque_info(id)
 {
-	$( '#div_session_write').load('session_write.php?variable=info-' + id +'&valeur=1');
+	// $( '#div_session_write').load('session_write.php?variable=info-' + id +'&valeur=1');
+	session_write_variable('info-'+id,1);
+	
 }
 
 function masque_description(id)
@@ -416,7 +460,8 @@ function masque_description(id)
 
 		$( '#chevron-' + id ).html("<i class=\"fa fa-angle-double-down fa-border\" aria-hidden=\"true\"></i>");
 		$( '#chevron-' + id ).attr('data-original-title', 'Montrer la description').tooltip('show');
-		$( '#div_session_write').load('session_write.php?variable=description-' + id +'&valeur=0');
+		// $( '#div_session_write').load('session_write.php?variable=description-' + id +'&valeur=0');
+		session_write_variable('description-'+id,0);
 	}
 	else
 	{
@@ -433,7 +478,8 @@ function masque_description(id)
 		
 		$( '#chevron-' + id ).html("<i class=\"fa fa-angle-double-up fa-border\" aria-hidden=\"true\"></i>");
 		$( '#chevron-' + id ).attr('data-original-title', 'Masquer la description').tooltip('show');
-		$( '#div_session_write').load('session_write.php?variable=description-' + id +'&valeur=1');
+		// $( '#div_session_write').load('session_write.php?variable=description-' + id +'&valeur=1');
+		session_write_variable('description-'+id,1);
 	}
 }
 
