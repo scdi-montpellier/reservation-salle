@@ -95,8 +95,8 @@
 	// nombre de jour réservable + 1
 	$gNbJourReservation = 9;
 	
-	// nombre mms (requete api) par page
-	$gNbMmsParPage = 5;
+	// nombre salle par page
+	$gNbSalleParPage = 5;
 	
 	// info connexion mysql
 	$gaSql['user']       = "reservation-salle";

@@ -169,14 +169,25 @@
 					unset($bu[$codebu]['mmsid'][$keym]);
 			}
 			
-			$array['debug2'] = $tfiltreOK;
+			// $array['debug2'] = $tfiltreOK;
 		}
+		
+		$cptsalle=0;
+							
+		// on cherche le nombre de salles qui correspondent aux critères
+		foreach ($bu[$codebu]['mmsid'] as $keym => $valuem)
+			foreach ($valuem['holdingid'] as $keyh => $valueh)
+				foreach ($valueh['itemid'] as $keyi => $valuei)
+					$cptsalle++;
 
 		// on compte le nombre de mms...
-		$nbmms = count($bu[$codebu]['mmsid']);
+		// $nbmms = count($bu[$codebu]['mmsid']);
 
 		// on compte le nombre de page...
-		$nbpage = ceil($nbmms / $gNbMmsParPage);
+		// $nbpage = ceil($nbmms / $gNbMmsParPage);
+		
+		$nbpage = ceil($cptsalle / $gNbSalleParPage);
+		
 		$pagesuivante = $page+1;
 		$pageprecedente = $page-1;
 		
@@ -267,10 +278,11 @@
 						// Affichage des salles et agenda
 						if (count($bu[$codebu]['mmsid'])>0)
 						{	
-							
+					
 							if (!isset($_SESSION["info-1"]))
 							{
-								$message .= "<div id='info1' class='alert alert-warning alert-dismissible fade show' role='alert' role='alert'><i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i> Voici les disponibilités pour la ".$array['nombu']." le $jour_complement ".date("d/m/Y",strtotime($jour))."<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>";
+								$message .= "<div id='info1' class='alert alert-warning alert-dismissible fade show' role='alert' role='alert'><i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i> $cptsalle salle".(($cptsalle==1)?"":"s")." trouvée".(($cptsalle==1)?"":"s")." - Voici les disponibilités pour le $jour_complement ".date("d/m/Y",strtotime($jour))."<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>";
+								// $message .= "<div id='info1' class='alert alert-warning alert-dismissible fade show' role='alert' role='alert'><i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i> Voici les disponibilités pour la ".$array['nombu']." le $jour_complement ".date("d/m/Y",strtotime($jour))."<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>";
 								$message .= "<SCRIPT>";
 								$message .= "$('#info1').on('closed.bs.alert', function () {";
 								$message .= "  masque_info(1);";
@@ -282,155 +294,159 @@
 
 							$bookings = array();
 
-							// on recherche les prêts en cours pour chaque salle... Attention, des prêt non rendu peuvent bloqué la salle (heure de fin indéfinie) !
-							// if (date("d/m/Y",strtotime($date_actuelle))==date("d/m/Y",strtotime($jour)))
-							if (true)
+							// on recherche les prêts en cours pour chaque salle... Attention, des prêts non rendu peuvent bloqué la salle (heure de fin indéfinie), on ne les affiche pas
+							if (date("d/m/Y",strtotime($date_actuelle))==date("d/m/Y",strtotime($jour)))
+							// if (true)
 							{
-								$cptmms = 1;
-								
+								$cptitem = 1;
+								// filtrage affichage par page
+								$minitem = (($page-1)*$gNbSalleParPage)+1;
+								$maxitem = $minitem+$gNbSalleParPage;
+									
 								foreach ($bu[$codebu]['mmsid'] as $keym => $valuem)
 								{
-									// filtrage affichage par page
-									$minmms = (($page-1)*$gNbMmsParPage)+1;
-									$maxmms = $minmms+$gNbMmsParPage;
-									if (($cptmms >= $minmms) && ($cptmms < $maxmms))
-									{
+									// if (($cptmms >= $minmms) && ($cptmms < $maxmms))
+									// {
 										foreach ($valuem['holdingid'] as $keyh => $valueh)
-										{ 
+										{
 											foreach ($valueh['itemid'] as $keyi => $valuei)
 											{
-												
-												$identifiant_affichage = $keyi; // on peut mettre $keym à condition qu'il n'y est que 1 salle par notice...
-												
-												// utilisation api request par itemid (il pourrait y avoir plusieurs salles par mms / holding)...
-												$url = "$gAdrAlma/almaws/v1/bibs/$keym/holdings/$keyh/items/$keyi/booking-availability?period=$gNbJourReservation&period_type=days&user_id_type=all_unique&lang=fr&apikey=$gTokenAlma";
-												
-												// $debug .= "$url\n";
-												
-												$ch1 = curl_init();
-												curl_setopt($ch1,CURLOPT_RETURNTRANSFER, true);
-
-												curl_setopt($ch1,CURLOPT_URL, $url);
-												$result1 = curl_exec($ch1);
-												
-												$xml_result_pret = simplexml_load_string($result1);
-												$cptba=0;
-												
-												foreach($xml_result_pret as $booking_availabilities)
+												if (($cptitem >= $minitem) && ($cptitem < $maxitem))
 												{
+													$identifiant_affichage = $keyi; // on peut mettre $keym à condition qu'il n'y est que 1 salle par notice...
 													
-													if ($booking_availabilities->reason == "Prêt" || $booking_availabilities->reason == "Réservé") // valeur possible : Prêt ou Réservé
+													// utilisation api request par itemid (il pourrait y avoir plusieurs salles par mms / holding)...
+													$url = "$gAdrAlma/almaws/v1/bibs/$keym/holdings/$keyh/items/$keyi/booking-availability?period=$gNbJourReservation&period_type=days&user_id_type=all_unique&lang=fr&apikey=$gTokenAlma";
+													
+													// $debug .= "$url\n";
+													
+													$ch1 = curl_init();
+													curl_setopt($ch1,CURLOPT_RETURNTRANSFER, true);
+
+													curl_setopt($ch1,CURLOPT_URL, $url);
+													$result1 = curl_exec($ch1);
+													
+													$xml_result_pret = simplexml_load_string($result1);
+													$cptba=0;
+													
+													foreach($xml_result_pret as $booking_availabilities)
 													{
-
-														// $debug =$date_actuelle;
 														
-														if (date("d/m/Y",strtotime($date_actuelle))==date("d/m/Y",strtotime($jour)))
-														{   // pret pour la date du jour
-															$date_ref = $date_actuelle; // contient l'heure
-															// $affichage_pret = (strtotime($date_ref)<=strtotime($booking_availabilities->to_time));
-														}
-														else
-														{   // pret pour une date suivante
-															$date_ref = $jour. " 00:00:00";
-															// $affichage_pret = (strtotime($date_ref) >= strtotime($booking_availabilities->from_time)) && (strtotime($date_ref)<=strtotime($booking_availabilities->to_time));
-														}
-														
-														// on affiche que la prêt de la date_ref en cours
-														$affichage_pret = (strtotime($date_ref) >= strtotime($booking_availabilities->from_time)) && (strtotime($date_ref)<=strtotime($booking_availabilities->to_time));
-														
-														if ($affichage_pret)
+														if ($booking_availabilities->reason == "Prêt" || $booking_availabilities->reason == "Réservé") // valeur possible : Prêt ou Réservé
 														{
-															// $debug = date("Y-m-d H:i",strtotime($booking_availabilities->from_time));
-															
-															// par défaut on met les bornes d'ouverture/fermeture
-															$ouverturepret = date("G",strtotime($bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['ouverture'])); // 8
-															$fermeturepret = date("G",strtotime($bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['fermeture'])); // 21
-															
-															if (date("d/m/Y",strtotime($booking_availabilities->from_time)) == date("d/m/Y",strtotime($booking_availabilities->to_time)))
-															{	
-																$note = "Prêt en cours jusqu'au ".date("d/m/Y H:i",strtotime($booking_availabilities->to_time));
-																	
-																// $note = $booking_availabilities->reason;
-																
-																if (date("d",strtotime($date_ref)) == date("d",strtotime($booking_availabilities->from_time)))
-																{
-																	$ouverturepret = date("G",strtotime($booking_availabilities->from_time));
-																	if (date("i",strtotime($booking_availabilities->from_time))>=30 && date("i",strtotime($booking_availabilities->from_time))<=59)
-																		$ouverturepret += 0.5;
-																}
-																
-																if (date("d",strtotime($date_ref)) == date("d",strtotime($booking_availabilities->to_time)))	
-																{
-																	$fermeturepret = date("G",strtotime($booking_availabilities->to_time));
-																	if (date("i",strtotime($booking_availabilities->to_time))==0)
-																		$fermeturepret -= 0.5;
-																	if (date("i",strtotime($booking_availabilities->to_time))>30 && date("i",strtotime($booking_availabilities->to_time))<=59)
-																		$fermeturepret += 0.5;
-																}
 
-																if ($ouverturepret<=$fermeturepret)
-																{
-																	// créneau avant 1er creneau
-																	// $lp=$ouverturepret - 0.5;
-																	// $bookings[(string) $identifiant_affichage]["$lp"]=['indisponible' => 2, 'note' => $note];
+															// $debug =$date_actuelle;
+															
+															if (date("d/m/Y",strtotime($date_actuelle))==date("d/m/Y",strtotime($jour)))
+															{   // pret pour la date du jour
+																$date_ref = $date_actuelle; // contient l'heure
+																// $affichage_pret = (strtotime($date_ref)<=strtotime($booking_availabilities->to_time));
+															}
+															else
+															{   // pret pour une date suivante
+																$date_ref = $jour. " 00:00:00";
+																// $affichage_pret = (strtotime($date_ref) >= strtotime($booking_availabilities->from_time)) && (strtotime($date_ref)<=strtotime($booking_availabilities->to_time));
+															}
+															
+															// on affiche que la prêt de la date_ref en cours
+															$affichage_pret = (strtotime($date_ref) >= strtotime($booking_availabilities->from_time)) && (strtotime($date_ref)<=strtotime($booking_availabilities->to_time));
+															
+															if ($affichage_pret)
+															{
+																// $debug = date("Y-m-d H:i",strtotime($booking_availabilities->from_time));
+																
+																// par défaut on met les bornes d'ouverture/fermeture
+																$ouverturepret = date("G",strtotime($bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['ouverture'])); // 8
+																$fermeturepret = date("G",strtotime($bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['fermeture'])); // 21
+																
+																if (date("d/m/Y",strtotime($booking_availabilities->from_time)) == date("d/m/Y",strtotime($booking_availabilities->to_time)))
+																{	
+																	$note = "Prêt en cours jusqu'au ".date("d/m/Y H:i",strtotime($booking_availabilities->to_time));
+																		
+																	// $note = $booking_availabilities->reason;
 																	
-																	//1er creneau 
-																	if (date("d/m/Y",strtotime($booking_availabilities->from_time)) == date("d/m/Y",strtotime($booking_availabilities->to_time)))
-																		$bookings[(string) $identifiant_affichage]["$ouverturepret"]=['indisponible' => 2, 'note' => $note];
-																	else
-																		$bookings[(string) $identifiant_affichage]["$ouverturepret"]=['indisponible' => 1, 'note' => $note];
-																	
-																	for ($l=$ouverturepret+0.5; $l<$fermeturepret; $l+=0.5) 
+																	if (date("d",strtotime($date_ref)) == date("d",strtotime($booking_availabilities->from_time)))
 																	{
-																		$bookings[(string) $identifiant_affichage]["$l"]=['indisponible' => 1, 'note' => $note];
+																		$ouverturepret = date("G",strtotime($booking_availabilities->from_time));
+																		if (date("i",strtotime($booking_availabilities->from_time))>=30 && date("i",strtotime($booking_availabilities->from_time))<=59)
+																			$ouverturepret += 0.5;
 																	}
 																	
-																	//dernier creneau 
-																	$bookings[(string) $identifiant_affichage]["$fermeturepret"]=['indisponible' => 3, 'note' => $note];
-																	
-																	if ($ouverturepret==$fermeturepret) // cas particulier prêt de 30 minutes faite avec alma
+																	if (date("d",strtotime($date_ref)) == date("d",strtotime($booking_availabilities->to_time)))	
 																	{
-																		$bookings[(string) $identifiant_affichage]["$fermeturepret"]=['indisponible' => 4, 'note' => $note];
+																		$fermeturepret = date("G",strtotime($booking_availabilities->to_time));
+																		if (date("i",strtotime($booking_availabilities->to_time))==0)
+																			$fermeturepret -= 0.5;
+																		if (date("i",strtotime($booking_availabilities->to_time))>30 && date("i",strtotime($booking_availabilities->to_time))<=59)
+																			$fermeturepret += 0.5;
 																	}
-																	
-																	// créneau après dernier creneau
-																	// $bookings[(string) $identifiant_affichage]["$l"]=['indisponible' => 2, 'note' => $note];
 
-																	// $message .= min($bookings).'/'.max($bookings);
-																	// $debug =$bookings;
-																	// $debug ="$date_ref $ouverturepret<=$fermeturepret | " . date("Y-m-d H:i:s",strtotime($booking_availabilities->from_time)) . "->" .date("Y-m-d H:i:s",strtotime($booking_availabilities->to_time)) ;
-																	$debug .= "ItemID $identifiant_affichage - prêt en cours détecté : $ouverturepret -> $fermeturepret\n";
+																	if ($ouverturepret<=$fermeturepret)
+																	{
+																		// créneau avant 1er creneau
+																		// $lp=$ouverturepret - 0.5;
+																		// $bookings[(string) $identifiant_affichage]["$lp"]=['indisponible' => 2, 'note' => $note];
+																		
+																		//1er creneau 
+																		if (date("d/m/Y",strtotime($booking_availabilities->from_time)) == date("d/m/Y",strtotime($booking_availabilities->to_time)))
+																			$bookings[(string) $identifiant_affichage]["$ouverturepret"]=['indisponible' => 2, 'note' => $note];
+																		else
+																			$bookings[(string) $identifiant_affichage]["$ouverturepret"]=['indisponible' => 1, 'note' => $note];
+																		
+																		for ($l=$ouverturepret+0.5; $l<$fermeturepret; $l+=0.5) 
+																		{
+																			$bookings[(string) $identifiant_affichage]["$l"]=['indisponible' => 1, 'note' => $note];
+																		}
+																		
+																		//dernier creneau 
+																		$bookings[(string) $identifiant_affichage]["$fermeturepret"]=['indisponible' => 3, 'note' => $note];
+																		
+																		if ($ouverturepret==$fermeturepret) // cas particulier prêt de 30 minutes faite avec alma
+																		{
+																			$bookings[(string) $identifiant_affichage]["$fermeturepret"]=['indisponible' => 4, 'note' => $note];
+																		}
+																		
+																		// créneau après dernier creneau
+																		// $bookings[(string) $identifiant_affichage]["$l"]=['indisponible' => 2, 'note' => $note];
+
+																		// $message .= min($bookings).'/'.max($bookings);
+																		// $debug =$bookings;
+																		// $debug ="$date_ref $ouverturepret<=$fermeturepret | " . date("Y-m-d H:i:s",strtotime($booking_availabilities->from_time)) . "->" .date("Y-m-d H:i:s",strtotime($booking_availabilities->to_time)) ;
+																		$debug .= "ItemID $identifiant_affichage - prêt en cours détecté : $ouverturepret -> $fermeturepret\n";
+																	}
+																
 																}
-															
+																else {
+																	// 	$note = "Prêt en cours - en retard - salle non réservable pour le moment";
+																	$debug .= "ItemID $identifiant_affichage : Prêt en retard detecté (non bloquant)\n";
+																}
+																$cptba++;
 															}
-															else {
-																// 	$note = "Prêt en cours - en retard - salle non réservable pour le moment";
-																$debug .= "ItemID $identifiant_affichage : Prêt en retard detecté (non bloquant)\n";
-															}
-															$cptba++;
 														}
 													}
 												}
+												$cptitem++;
 											}
 										}
-									}
+									// }
+									// $cptmms++;
 								}
 							}
 							
-							// on recherche les réservations pour chaque mms (marche pour résa dont débutet fin dans lamême journée = faite par l'appli)
+							// on recherche les réservations pour chaque mms (marche pour résa dont début et fin dans lamême journée = faite par l'appli)
 							// if (date("d/m/Y",strtotime($date_actuelle))!=date("d/m/Y",strtotime($jour)))
 							if (true)
 							{
-								$cptmms = 1;
+								// $cptitem = 1;
+								
+								// filtrage affichage par page
+								// $minitem = (($page-1)*$gNbSalleParPage)+1;
+								// $maxitem = $minmms+$gNbSalleParPage;
+								
 								foreach ($bu[$codebu]['mmsid'] as $key => $value)
 								{
-									// filtrage affichage par page
-									$minmms = (($page-1)*$gNbMmsParPage)+1;
-									$maxmms = $minmms+$gNbMmsParPage;
-
-									if (($cptmms >= $minmms) && ($cptmms < $maxmms))
-									{
-										
+									// if (($cptmms >= $minmms) && ($cptmms < $maxmms))
+									// {
 										// utilisation api request par mms (il pourrait y avoir plusieurs salles par mms / holding)...
 										$url = "$gAdrAlma/almaws/v1/bibs/$key/requests?request_type=BOOKING&status=active&lang=fr&apikey=$gTokenAlma";
 										// $debug .= "$url\n";
@@ -449,7 +465,19 @@
 										// PARSE RESULTS
 										foreach($xml_result->user_request as $user_request)
 										{
-												
+											// debug
+											// $message .= "<div style='margin-left:5px;margin-bottom:5px;'>##debug##<br/>Demande n°" . $user_request->request_id;
+											// $message .= "<br/>Mmsid : " . $key;
+											// $message .= "<br/>Utilisateur : " . $user_request->user_primary_id;
+											// $message .= "<br/>Titre : " . $user_request->title;
+											// $message .= "<br/>Description : " . $user_request->description;
+											// $message .= "<br/>Code-barre : " . $user_request->barcode;
+											// $message .= "<br/>Itemid : " . $user_request->item_id;
+											// $message .= "<br/>Comment : " . $user_request->comment;
+											// $message .= "<br/>Début : " . date("Y-m-d H:i",strtotime($user_request->adjusted_booking_start_date));
+											// $message .= "<br/>Fin : " . date("Y-m-d H:i",strtotime($user_request->adjusted_booking_end_date));
+											// $message .= "</div>";
+													
 											// todo ne marche pas avec une résa sur plusieurs jours (faite via alma)
 											if (date("d/m/Y",strtotime($date_actuelle))==date("d/m/Y",strtotime($jour)))
 											{   // pret pour la date du jour
@@ -474,26 +502,16 @@
 												$identifiant_affichage = $user_request->item_id; //on peut mettre $key à condition qu'il n'y est que 1 salle par notice...
 												
 												if ($user_request->item_id != "")
-												{
-													// debug
-													// $message .= "<div style='margin-left:5px;margin-bottom:5px;'>##debug##<br/>Demande n°" . $user_request->request_id;
-													// $message .= "<br/>Mmsid : " . $key;
-													// $message .= "<br/>Utilisateur : " . $user_request->user_primary_id;
-													// $message .= "<br/>Titre : " . $user_request->title;
-													// $message .= "<br/>Description : " . $user_request->description;
-													// $message .= "<br/>Code-barre : " . $user_request->barcode;
-													// $message .= "<br/>Itemid : " . $user_request->item_id;
-													// $message .= "<br/>Note : " . $user_request->comment;
-													// $message .= "<br/>Début : " . date("Y-m-d H:i",strtotime($user_request->adjusted_booking_start_date));
-													// $message .= "<br/>Fin : " . date("Y-m-d H:i",strtotime($user_request->adjusted_booking_end_date));
-													// $message .= "</div>";
-																			
+												{				
 													$note = "";
 													
 													if (strtolower(trim($user_request->comment))==strtolower("réservé par application ".$gNomAppli))
-														$note = "Réservé du ".date("d/m/Y H:i",strtotime($user_request->adjusted_booking_start_date))." au ".date("d/m/Y H:i",strtotime($user_request->adjusted_booking_end_date));
+														$note = "Réservé du ".date("d/m/Y H:i",strtotime($user_request->adjusted_booking_start_date))." au ".date("d/m/Y H:i",strtotime($user_request->adjusted_booking_end_date))." #".$user_request->request_id;
 													elseif  (trim($user_request->comment)!='')
-														$note = trim($user_request->comment)." - Réservé du ".date("d/m/Y H:i",strtotime($user_request->adjusted_booking_start_date))." au ".date("d/m/Y H:i",strtotime($user_request->adjusted_booking_end_date))."";
+														$note = trim($user_request->comment)." - Réservé du ".date("d/m/Y H:i",strtotime($user_request->adjusted_booking_start_date))." au ".date("d/m/Y H:i",strtotime($user_request->adjusted_booking_end_date))." #".$user_request->request_id;
+													elseif  (trim($user_request->comment)=='')
+														$note = "Réservé du ".date("d/m/Y H:i",strtotime($user_request->adjusted_booking_start_date))." au ".date("d/m/Y H:i",strtotime($user_request->adjusted_booking_end_date))." #".$user_request->request_id;
+
 
 													$ouvertureresa = date("G",strtotime($bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['ouverture'])); // ex : 8
 													$fermetureresa = date("G",strtotime($bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['fermeture'])); // ex : 21
@@ -551,9 +569,9 @@
 
 										}
 										
-									}
+									// }
 									
-									$cptmms++;
+									// $cptmms++;
 								}
 							}
 							
@@ -569,295 +587,301 @@
 							}
 						
 						
-							$cptmms = 1;
+							$cptitem = 1;
 							
+							// filtrage affichage par page
+							$minitem = (($page-1)*$gNbSalleParPage)+1;
+							$maxitem = $minitem+$gNbSalleParPage;
+							
+							// Affichage des salles
 							foreach ($bu[$codebu]['mmsid'] as $keym => $valuem)
 							{
-								// filtrage affichage par page
-								$minmms = (($page-1)*$gNbMmsParPage)+1;
-								$maxmms = $minmms+$gNbMmsParPage;
-								if (($cptmms >= $minmms) && ($cptmms < $maxmms))
-								{
+								// if (($cptmms >= $minmms) && ($cptmms < $maxmms))
+								// {
 									foreach ($valuem['holdingid'] as $keyh => $valueh)
 									{ 
 										foreach ($valueh['itemid'] as $keyi => $valuei)
 										{ 
-											// $ouverturetxt = date("H:i",strtotime($bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['ouverture']));
-											// $fermeturetxt = date("H:i",strtotime($bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['fermeture']));	
-											
-											$description=$valuei["description"];
-											$url_description=$valuei["url_description"];
-											
-											$icon_chevron = "fa-angle-double-up";
-											$icon_chevron_ttt = "Masquer la description";
-											$data_visible = 1;
-											$visible = "visible";
-											$style = "display:block;";
-											
-											if (isset($_SESSION["description-$keyi"]))
-												if ($_SESSION["description-$keyi"] == 0)
-												{
-													$icon_chevron = "fa-angle-double-down";
-													$data_visible = 0;
-													$icon_chevron_ttt = "Montrer la description";
-													$visible = "invisible";
-													$style = "height:0px; display:block;";
-												}
-					
+											if (($cptitem >= $minitem) && ($cptitem < $maxitem))
+											{
+												// $ouverturetxt = date("H:i",strtotime($bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['ouverture']));
+												// $fermeturetxt = date("H:i",strtotime($bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['fermeture']));	
 												
-											$message .= "<div class=\"border rounded mb-2 p-1\"><a id='chevron-$keyi' data-toggle=\"tooltip\" data-placement=\"top\" data-id='$keyi' class='btn_description float-right' title='$icon_chevron_ttt'><i class=\"fa $icon_chevron fa-border\" aria-hidden=\"true\"></i></a>";
-											
-											// $message .= "<div class=\"d-flex flex-wrap\">";
-											$message .= "<div class=\"d-flex\">";
-												$message .= "<div style=\"margin-right:10px;\"><span style=\"font-size:20px;font-weight: bold;\">".$valuei['nom']."</span>&nbsp&nbsp;";
-												if ($url_description!= "")
-													$message .= "<a data-toggle=\"tooltip\" data-placement=\"top\" href='$url_description' title='Accéder à la page web de la salle' target='_blank'><i class=\"fa fa-link\" aria-hidden=\"true\"></i></a>";
+												$description=$valuei["description"];
+												$url_description=$valuei["url_description"];
+												
+												$icon_chevron = "fa-angle-double-up";
+												$icon_chevron_ttt = "Masquer la description";
+												$data_visible = 1;
+												$visible = "visible";
+												$style = "display:block;";
+												
+												if (isset($_SESSION["description-$keyi"]))
+													if ($_SESSION["description-$keyi"] == 0)
+													{
+														$icon_chevron = "fa-angle-double-down";
+														$data_visible = 0;
+														$icon_chevron_ttt = "Montrer la description";
+														$visible = "invisible";
+														$style = "height:0px; display:block;";
+													}
+						
+													
+												$message .= "<div class=\"border rounded mb-2 p-1\"><a id='chevron-$keyi' data-toggle=\"tooltip\" data-placement=\"top\" data-id='$keyi' class='btn_description float-right' title='$icon_chevron_ttt'><i class=\"fa $icon_chevron fa-border\" aria-hidden=\"true\"></i></a>";
+												
+												// $message .= "<div class=\"d-flex flex-wrap\">";
+												$message .= "<div class=\"d-flex\">";
+													$message .= "<div style=\"margin-right:10px;\"><span style=\"font-size:20px;font-weight: bold;\">".$valuei['nom']."</span>&nbsp&nbsp;";
+													if ($url_description!= "")
+														$message .= "<a data-toggle=\"tooltip\" data-placement=\"top\" href='$url_description' title='Accéder à la page web de la salle' target='_blank'><i class=\"fa fa-link\" aria-hidden=\"true\"></i></a>";
+													$message .= "</div>";
+													$message .= "<div style='margin-top:3px;padding-top:0px;padding-right:5px;' id=\"alert-".$keyi."\"></div>";
+													
 												$message .= "</div>";
-												$message .= "<div style='margin-top:3px;padding-top:0px;padding-right:5px;' id=\"alert-".$keyi."\"></div>";
-												
-											$message .= "</div>";
-											$message .= "<hr style='margin:0px;padding:0px;' />";
-											$message .= "<div style='$style' class='$visible' data-visible='$data_visible' id='description-$keyi'>";
-												$message .= "<div class='mr-10' id='description-int-$keyi'><i>".$description."</i></div>";
-											$message .= "</div>";
-							
-											$message .= "<div style=\"padding-top:3px;\" class=\"d-flex flex-wrap\">";
-											
-											$heure_ouverture = "";
-											
-											// onglet sélectionné = aujourd'hui
-											if (date("d/m/Y",strtotime($date_actuelle)) == date("d/m/Y",strtotime($jour))) 
-											{
-												// todo voir ouverture spécifique après heure actuelle (tester le matin avant ouverture !!!)
-
-												// on cherche si la BU n'est pas dans un horaire spécifique
-												foreach ($bu[$codebu]['horaire_specifique'] as $key => $value) 
-												{
-													$dd = new DateTime(date("Y-m-d",strtotime($value['debut'])));
-													
-													$df = new DateTime(date("Y-m-d",strtotime($value['fin'])));
-													
-													$da = new DateTime(date("Y-m-d",strtotime($jour)));
-													
-													if (($da>=$dd) && ($da<=$df)) {
-														$heure_ouverture = date("Y-m-d",strtotime($jour)) . " " . $value['ouverture'];
-														break;
-													}
-												}
-												
-												if ($heure_ouverture=="") // pas d'heure spécifique,  on met la date / heure d'ouverture normale
-													$heure_ouverture = date("Y-m-d",strtotime($jour)) . " " . $bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['ouverture'];
-												
-												//heure spécifique
-												$ouverture_calendrier = strtotime($heure_ouverture);
-			
-												if ($ouverture_calendrier > strtotime(date("Y-m-d H:i:s",strtotime($date_actuelle))))
-												{
-													// si l'horaire d'ouverture n'est dépassée, on met l'heure d'ouverture normale ou spécifique
-													$ouverture = date("G", $ouverture_calendrier);
-													
-													if (date("i", $ouverture_calendrier )>=30)
-														$ouverture += 0.5;
-												}
-												else
-												{
-													// si l'horaire d'ouverture est dépassée, on met l'heure actuelle
-													//heure actuelle + 30min
-													$ouverture = date("G", strtotime($date_actuelle . " +30 minutes"));
-													
-													// if (date("i", strtotime(date("Y-m-d H:i:s") . " +30 minutes"))>=30)
-													if (date("i", strtotime($date_actuelle . " +30 minutes"))>=30)
-														$ouverture += 0.5;
-												}
-												
-											}
-											else //onglet sélectionné = J++ (pas aujourd'hui)
-											{
-												
-												// on cherche si la BU n'est pas dans un horaire spécifique
-												foreach ($bu[$codebu]['horaire_specifique'] as $key => $value) 
-												{
-													$dd = new DateTime(date("Y-m-d",strtotime($value['debut'])));
-													
-													$df = new DateTime(date("Y-m-d",strtotime($value['fin'])));
-													
-													$da = new DateTime(date("Y-m-d",strtotime($jour)));
-													
-													if (($da>=$dd) && ($da<=$df)) {
-														$heure_ouverture = date("Y-m-d",strtotime($jour)) . " " . $value['ouverture'];
-														break;
-													}
-												}
-												
-												//heure de ouverture normale
-												if ($heure_ouverture == "") //pas d'heure spécifique,  on met l'heure d'ouverture normale
-													$heure_ouverture = date("Y-m-d",strtotime($jour)) . " " . $bu[$codebu]['horaire']["j".date("N",strtotime($jour))]['ouverture'];
-
-												$ouverture = date("G",strtotime($heure_ouverture)); // probleme avec ouverture / minute > 00 ?
-
-												if (date("i",strtotime($heure_ouverture))>=30)
-													$ouverture += 0.5;
-												
-											}
-											
-											
-											$heure_fermeture = "";
+												$message .= "<hr style='margin:0px;padding:0px;' />";
+												$message .= "<div style='$style' class='$visible' data-visible='$data_visible' id='description-$keyi'>";
+													$message .= "<div class='mr-10' id='description-int-$keyi'><i>".$description."</i></div>";
+												$message .= "</div>";
 								
-											// on cherche si la BU n'est pas dans un horaire spécifique
-											foreach ($bu[$codebu]['horaire_specifique'] as $key => $value) 
-											{
-												$dd = new DateTime(date("Y-m-d",strtotime($value['debut'])));
+												$message .= "<div style=\"padding-top:3px;\" class=\"d-flex flex-wrap\">";
 												
-												$df = new DateTime(date("Y-m-d",strtotime($value['fin'])));
+												$heure_ouverture = "";
 												
-												$da = new DateTime(date("Y-m-d",strtotime($jour)));
-												
-												if (($da>=$dd) && ($da<=$df)) {
-													$heure_fermeture = $value['fermeture'];
-													break;
-												}
-											}
-											
-											//heure de fermeture normale
-											if ($heure_fermeture == "")
-												$heure_fermeture = $bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['fermeture'];
-											
-											if ($heure_fermeture == "24:00:00") // cas particulier fermeture à minuit, note ça marche pas si fermeture après minuit
-												$fermeture = 24;
-											else
-												$fermeture = date("G",strtotime($heure_fermeture));
-											
-											if (date("i",strtotime($heure_fermeture))>=30)
-												$fermeture += 0.5;
-											
-											// $message .= $ouverture . "/".$fermeture;
-
-											$c=0;
-											
-											if ($ouverture < $fermeture-(($creneau_min * 30)/60))
-											{	
-												for ($k=$ouverture; $k<$fermeture; $k+=0.5) 
+												// onglet sélectionné = aujourd'hui
+												if (date("d/m/Y",strtotime($date_actuelle)) == date("d/m/Y",strtotime($jour))) 
 												{
-													
-													$creneauclass = "creneaudispo text-white";
-													$creneauttt = "Créneau disponible, cliquer pour sélectionner ce créneau";
-													$dataselection = "0";
+													// todo voir ouverture spécifique après heure actuelle (tester le matin avant ouverture !!!)
 
-													$rounded = "";
-													if ($k==$ouverture)		
-														$rounded = "rounded-left";
-													if ($k==$fermeture-0.5)	
-														$rounded = "rounded-right";
-
-													// si le créneau est pris
-
-													if (isset($bookings[(string) $keyi]["$k"]))
+													// on cherche si la BU n'est pas dans un horaire spécifique
+													foreach ($bu[$codebu]['horaire_specifique'] as $key => $value) 
 													{
-														if ($bookings[(string) $keyi]["$k"]['indisponible']=="1")
-														{
-															$creneauclass = "creneauindispo text-white";
-															$creneauttt = "Créneau indisponible";
-															if (trim($bookings[(string) $keyi]["$k"]['note'])!="")
-																$creneauttt .= " (".trim($bookings[(string) $keyi]["$k"]['note']).")";
-															$dataselection = "2";
-														}
-
-														elseif ($bookings[(string) $keyi]["$k"]['indisponible']=="2")
-														{   //pas utilisé : 1er créneau de la réservation
-															$creneauclass = "creneauindispoinf text-white";
-															$creneauttt = "Créneau indisponible";
-															if (trim($bookings[(string) $keyi]["$k"]['note'])!="")
-																$creneauttt .= " (".trim($bookings[(string) $keyi]["$k"]['note']).")";
-															$dataselection = "2";
-														}
-														elseif ($bookings[(string) $keyi]["$k"]['indisponible']=="3")
-														{	//dernier créneau de la réservation
-															$creneauclass = "creneauindisposup text-white";
-															$creneauttt = "Créneau indisponible";
-															if (trim($bookings[(string) $keyi]["$k"]['note'])!="")
-																$creneauttt .= " (".trim($bookings[(string) $keyi]["$k"]['note']).")";
-															$dataselection = "2";
-														}
-														elseif ($bookings[(string) $keyi]["$k"]['indisponible']=="4")
-														{	//ca particulier 1 seul créneau ddns la réservation
-															$creneauclass = "creneauindispoinfsup text-white";
-															$creneauttt = "Créneau indisponible";
-															if (trim($bookings[(string) $keyi]["$k"]['note'])!="")
-																$creneauttt .= " (".trim($bookings[(string) $keyi]["$k"]['note']).")";
-															$dataselection = "2";
-														}
-													}
-													
-													// si le creneau est le 1er de la journée
-													// if ($k==$ouverture-0.5)
-													// {
-														// $creneauclass = "creneauindispofermeture text-white";
-														// $creneauttt = "Créneau indisponible (BU fermée)";
-														// $dataselection = "2";
-													// }
-													
-													// si le creneau est le dernier de la journée
-													if ($k==$fermeture-0.5)
-													{
-														$creneauclass = "creneauindispofermeture text-white";
-														$creneauttt = "Créneau indisponible (la BU va bientôt fermer)";
-														$dataselection = "2";
-													}
-													
-													//formatage heure sur 2 chiffres
-													if ($k<10)
-														$ktxt = "0".intval($k);
-													else
-														$ktxt = intval($k);
-													
-													//formatage heure suivante sur 2 chiffres
-													$ks = $k+0.5;
-													if ($ks<10)
-														$kstxt = "0".intval($ks);
-													else
-														$kstxt = intval($ks);						
-													
-													// affichage des minutes de fin du creneau
-													if (intval($k)==$k)	
-														$creneauminute = "00";
-													else
-														$creneauminute = "30";
-
-													$datecreneaufin = strtotime(date("Y-m-d H:i", strtotime(date("Y-m-d $ktxt:$creneauminute:00",strtotime($jour)))) . " +29 minute");
+														$dd = new DateTime(date("Y-m-d",strtotime($value['debut'])));
 														
-													$message .= "<div style=\"padding:5px;margin-bottom:1px;margin-top:1px;\" 
-																	  id='c-".$keyi."-$k' 
-																	  class=\"salle2 $creneauclass $rounded\" 
-																	  data-toggle=\"tooltip\" data-placement=\"top\" 
-																	  title=\"$creneauttt\" 
-																	  data-nomsalle=\"".$valuei['nom']."\" 
-																	  data-mmsid='".$keym."' 
-																	  data-holdingid='".$keyh."' 
-																	  data-itemid='".$keyi."' 
-																	  data-cb='".$valuei['cb']."' 
-																	  data-selection=\"$dataselection\" 
-																	  data-num=\"$k\" 
-																	  data-creneautxt=\"".date("d/m/Y",strtotime($jour))." $ktxt:$creneauminute à ".date("H:i",$datecreneaufin)."\" 
-																	  data-horairefin=\"".date("Y-m-d H:i:s",$datecreneaufin)."\" 
-																	  data-horaire=\"".date("Y-m-d",strtotime($jour))." $ktxt:$creneauminute:00\">"
-																	  .$ktxt."h$creneauminute</div>";
+														$df = new DateTime(date("Y-m-d",strtotime($value['fin'])));
+														
+														$da = new DateTime(date("Y-m-d",strtotime($jour)));
+														
+														if (($da>=$dd) && ($da<=$df)) {
+															$heure_ouverture = date("Y-m-d",strtotime($jour)) . " " . $value['ouverture'];
+															break;
+														}
+													}
 													
-													$c++;
-
+													if ($heure_ouverture=="") // pas d'heure spécifique,  on met la date / heure d'ouverture normale
+														$heure_ouverture = date("Y-m-d",strtotime($jour)) . " " . $bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['ouverture'];
+													
+													//heure spécifique
+													$ouverture_calendrier = strtotime($heure_ouverture);
+				
+													if ($ouverture_calendrier > strtotime(date("Y-m-d H:i:s",strtotime($date_actuelle))))
+													{
+														// si l'horaire d'ouverture n'est dépassée, on met l'heure d'ouverture normale ou spécifique
+														$ouverture = date("G", $ouverture_calendrier);
+														
+														if (date("i", $ouverture_calendrier )>=30)
+															$ouverture += 0.5;
+													}
+													else
+													{
+														// si l'horaire d'ouverture est dépassée, on met l'heure actuelle
+														//heure actuelle + 30min
+														$ouverture = date("G", strtotime($date_actuelle . " +30 minutes"));
+														
+														// if (date("i", strtotime(date("Y-m-d H:i:s") . " +30 minutes"))>=30)
+														if (date("i", strtotime($date_actuelle . " +30 minutes"))>=30)
+															$ouverture += 0.5;
+													}
+													
 												}
+												else //onglet sélectionné = J++ (pas aujourd'hui)
+												{
+													
+													// on cherche si la BU n'est pas dans un horaire spécifique
+													foreach ($bu[$codebu]['horaire_specifique'] as $key => $value) 
+													{
+														$dd = new DateTime(date("Y-m-d",strtotime($value['debut'])));
+														
+														$df = new DateTime(date("Y-m-d",strtotime($value['fin'])));
+														
+														$da = new DateTime(date("Y-m-d",strtotime($jour)));
+														
+														if (($da>=$dd) && ($da<=$df)) {
+															$heure_ouverture = date("Y-m-d",strtotime($jour)) . " " . $value['ouverture'];
+															break;
+														}
+													}
+													
+													//heure de ouverture normale
+													if ($heure_ouverture == "") //pas d'heure spécifique,  on met l'heure d'ouverture normale
+														$heure_ouverture = date("Y-m-d",strtotime($jour)) . " " . $bu[$codebu]['horaire']["j".date("N",strtotime($jour))]['ouverture'];
+
+													$ouverture = date("G",strtotime($heure_ouverture)); // probleme avec ouverture / minute > 00 ?
+
+													if (date("i",strtotime($heure_ouverture))>=30)
+														$ouverture += 0.5;
+													
+												}
+												
+												
+												$heure_fermeture = "";
+									
+												// on cherche si la BU n'est pas dans un horaire spécifique
+												foreach ($bu[$codebu]['horaire_specifique'] as $key => $value) 
+												{
+													$dd = new DateTime(date("Y-m-d",strtotime($value['debut'])));
+													
+													$df = new DateTime(date("Y-m-d",strtotime($value['fin'])));
+													
+													$da = new DateTime(date("Y-m-d",strtotime($jour)));
+													
+													if (($da>=$dd) && ($da<=$df)) {
+														$heure_fermeture = $value['fermeture'];
+														break;
+													}
+												}
+												
+												//heure de fermeture normale
+												if ($heure_fermeture == "")
+													$heure_fermeture = $bu[$codebu]['horaire']['j'.date("N",strtotime($jour))]['fermeture'];
+												
+												if ($heure_fermeture == "24:00:00") // cas particulier fermeture à minuit, note ça marche pas si fermeture après minuit
+													$fermeture = 24;
+												else
+													$fermeture = date("G",strtotime($heure_fermeture));
+												
+												if (date("i",strtotime($heure_fermeture))>=30)
+													$fermeture += 0.5;
+												
+												// $message .= $ouverture . "/".$fermeture;
+
+												$c=0;
+												
+												if ($ouverture < $fermeture-(($creneau_min * 30)/60))
+												{	
+													for ($k=$ouverture; $k<$fermeture; $k+=0.5) 
+													{
+														
+														$creneauclass = "creneaudispo text-white";
+														$creneauttt = "Créneau disponible, cliquer pour sélectionner ce créneau";
+														$dataselection = "0";
+
+														$rounded = "";
+														if ($k==$ouverture)		
+															$rounded = "rounded-left";
+														if ($k==$fermeture-0.5)	
+															$rounded = "rounded-right";
+
+														// si le créneau est pris
+
+														if (isset($bookings[(string) $keyi]["$k"]))
+														{
+															if ($bookings[(string) $keyi]["$k"]['indisponible']=="1")
+															{
+																$creneauclass = "creneauindispo text-white";
+																$creneauttt = "Créneau indisponible";
+																if (trim($bookings[(string) $keyi]["$k"]['note'])!="")
+																	$creneauttt .= " (".trim($bookings[(string) $keyi]["$k"]['note']).")";
+																$dataselection = "2";
+															}
+
+															elseif ($bookings[(string) $keyi]["$k"]['indisponible']=="2")
+															{   //pas utilisé : 1er créneau de la réservation
+																$creneauclass = "creneauindispoinf text-white";
+																$creneauttt = "Créneau indisponible";
+																if (trim($bookings[(string) $keyi]["$k"]['note'])!="")
+																	$creneauttt .= " (".trim($bookings[(string) $keyi]["$k"]['note']).")";
+																$dataselection = "2";
+															}
+															elseif ($bookings[(string) $keyi]["$k"]['indisponible']=="3")
+															{	//dernier créneau de la réservation
+																$creneauclass = "creneauindisposup text-white";
+																$creneauttt = "Créneau indisponible";
+																if (trim($bookings[(string) $keyi]["$k"]['note'])!="")
+																	$creneauttt .= " (".trim($bookings[(string) $keyi]["$k"]['note']).")";
+																$dataselection = "2";
+															}
+															elseif ($bookings[(string) $keyi]["$k"]['indisponible']=="4")
+															{	//ca particulier 1 seul créneau ddns la réservation
+																$creneauclass = "creneauindispoinfsup text-white";
+																$creneauttt = "Créneau indisponible";
+																if (trim($bookings[(string) $keyi]["$k"]['note'])!="")
+																	$creneauttt .= " (".trim($bookings[(string) $keyi]["$k"]['note']).")";
+																$dataselection = "2";
+															}
+														}
+														
+														// si le creneau est le 1er de la journée
+														// if ($k==$ouverture-0.5)
+														// {
+															// $creneauclass = "creneauindispofermeture text-white";
+															// $creneauttt = "Créneau indisponible (BU fermée)";
+															// $dataselection = "2";
+														// }
+														
+														// si le creneau est le dernier de la journée
+														if ($k==$fermeture-0.5)
+														{
+															$creneauclass = "creneauindispofermeture text-white";
+															$creneauttt = "Créneau indisponible (la BU va bientôt fermer)";
+															$dataselection = "2";
+														}
+														
+														//formatage heure sur 2 chiffres
+														if ($k<10)
+															$ktxt = "0".intval($k);
+														else
+															$ktxt = intval($k);
+														
+														//formatage heure suivante sur 2 chiffres
+														$ks = $k+0.5;
+														if ($ks<10)
+															$kstxt = "0".intval($ks);
+														else
+															$kstxt = intval($ks);						
+														
+														// affichage des minutes de fin du creneau
+														if (intval($k)==$k)	
+															$creneauminute = "00";
+														else
+															$creneauminute = "30";
+
+														$datecreneaufin = strtotime(date("Y-m-d H:i", strtotime(date("Y-m-d $ktxt:$creneauminute:00",strtotime($jour)))) . " +29 minute");
+															
+														$message .= "<div style=\"padding:5px;margin-bottom:1px;margin-top:1px;\" 
+																		  id='c-".$keyi."-$k' 
+																		  class=\"salle2 $creneauclass $rounded\" 
+																		  data-toggle=\"tooltip\" data-placement=\"top\" 
+																		  title=\"$creneauttt\" 
+																		  data-nomsalle=\"".$valuei['nom']."\" 
+																		  data-mmsid='".$keym."' 
+																		  data-holdingid='".$keyh."' 
+																		  data-itemid='".$keyi."' 
+																		  data-cb='".$valuei['cb']."' 
+																		  data-selection=\"$dataselection\" 
+																		  data-num=\"$k\" 
+																		  data-creneautxt=\"".date("d/m/Y",strtotime($jour))." $ktxt:$creneauminute à ".date("H:i",$datecreneaufin)."\" 
+																		  data-horairefin=\"".date("Y-m-d H:i:s",$datecreneaufin)."\" 
+																		  data-horaire=\"".date("Y-m-d",strtotime($jour))." $ktxt:$creneauminute:00\">"
+																		  .$ktxt."h$creneauminute</div>";
+														
+														$c++;
+
+													}
+												}
+												
+												if ($c==0)
+													$message .= "<div><i class='fa fa-calendar-times-o' aria-hidden='true'></i> Il n'y a plus assez de créneaux disponibles. La BU ferme à ".date("H\hi",strtotime($heure_fermeture)).".</div>";
+									
+												$message .= "</div>";
+												$message .= "</div>";
 											}
 											
-											if ($c==0)
-												$message .= "<div><i class='fa fa-calendar-times-o' aria-hidden='true'></i> Il n'y a plus assez de créneaux disponibles. La BU ferme à ".date("H\hi",strtotime($heure_fermeture)).".</div>";
-								
-											$message .= "</div>";
-											$message .= "</div>";
-										
+											$cptitem++;
 										}
 									}
-								}
+								// }
 
-								$cptmms++;
+								// $cptmms++;
 								
 							}
 							
