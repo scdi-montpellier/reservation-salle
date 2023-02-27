@@ -76,35 +76,6 @@
 		},
 		"mmsid": 
 		{
-			"9928520768504231": 
-			{
-				"id": "9928520768504231",
-				"holdingid": 
-				{
-					"22340827230004231": 
-					{
-						"id": "22340827230004231",
-						"itemid": 
-						{
-							"23340827210004231": 
-							{
-								"id": "23340827210004231",
-								"cb": "0MPD0328344",
-								"nom": "Salle 2HC",
-								"filtre": 
-								{
-									"Nom": "Salle 2HC",
-									"Capacité": "3-8 personnes",
-									"Localisation": "Étage 2H",
-									"Handiversité": "Non"
-								},
-								"description": "Salle de travail en groupe climatisée au 2e étage, équipée d'un écran de partage et d'un tableau blanc. Prêt d'un câble de liaison et de 2 feutres. Capacité de 3 à 8 personnes",
-								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827220004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%202HC&offset=0"
-							}
-						}
-					}
-				}
-			},
 			"9928474270404231": 
 			{
 				"id": "9928474270404231",
@@ -125,10 +96,41 @@
 									"Nom": "Salle 2HB",
 									"Capacité": "3-8 personnes",
 									"Localisation": "Étage 2H",
-									"Handiversité": "Non"
+									"Handiversité": "Non",
+									"Équipement": "Écran collaboratif, tableau blanc, clim"
 								},
 								"description": "Salle de travail en groupe climatisée au 2e étage, équipée d'un écran de partage et d'un tableau blanc. Prêt d'un câble de liaison et de 2 feutres. Capacité de 3 à 8 personnes",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21335949890004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%202HB&offset=0"
+							}
+						}
+					}
+				}
+			},
+			"9928520768504231": 
+			{
+				"id": "9928520768504231",
+				"holdingid": 
+				{
+					"22340827230004231": 
+					{
+						"id": "22340827230004231",
+						"itemid": 
+						{
+							"23340827210004231": 
+							{
+								"id": "23340827210004231",
+								"cb": "0MPD0328344",
+								"nom": "Salle 2HC",
+								"filtre": 
+								{
+									"Nom": "Salle 2HC",
+									"Capacité": "3-8 personnes",
+									"Localisation": "Étage 2H",
+									"Handiversité": "Non",
+									"Équipement": "Écran collaboratif, tableau blanc, clim"
+								},
+								"description": "Salle de travail en groupe climatisée au 2e étage, équipée d'un écran de partage et d'un tableau blanc. Prêt d'un câble de liaison et de 2 feutres. Capacité de 3 à 8 personnes",
+								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827220004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Salle%202HC&offset=0"
 							}
 						}
 					}
@@ -152,7 +154,8 @@
 								"filtre": 
 								{
 									"Nom": "Espace PMR",
-									"Handiversité": "Oui"
+									"Handiversité": "Oui",
+									"Équipement": "Lutrin empruntable à la banque de prêt"
 								},
 								"description": "Réservé aux étudiants en situation de handicap uniquement",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21338708760004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,Espace%20PMR&offset=0"
@@ -179,7 +182,8 @@
 								{
 									"Nom": "Ilôt (salle de formation)",
 									"Capacité": "3-5 personnes",
-									"Handiversité": "Non"
+									"Handiversité": "Non",
+									"Équipement": "Écran collaboratif"
 								},
 								"description": "3 personnes minimum, 5 personnes maximum",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21338708830004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%201%20salle%20de%20formation&offset=0"
@@ -207,7 +211,8 @@
 								{
 									"Nom": "Ilôt (salle de formation)",
 									"Capacité": "3-5 personnes",
-									"Handiversité": "Non"
+									"Handiversité": "Non",
+									"Équipement": "Écran collaboratif"
 								},
 								"description": "3 personnes minimum, 5 personnes maximum",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827180004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%202%20salle%20de%20formation&offset=0"
@@ -235,7 +240,8 @@
 								{
 									"Nom": "Ilôt (salle de formation)",
 									"Capacité": "3-5 personnes",
-									"Handiversité": "Non"
+									"Handiversité": "Non",
+									"Équipement": "Écran collaboratif"
 								},
 								"description": "3 personnes minimum, 5 personnes maximum",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827060004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%203%20salle%20de%20formation&offset=0"
@@ -263,7 +269,8 @@
 								{
 									"Nom": "Ilôt (salle de formation)",
 									"Capacité": "3-5 personnes",
-									"Handiversité": "Non"
+									"Handiversité": "Non",
+									"Équipement": "Écran collaboratif"
 								},
 								"description": "3 personnes minimum, 5 personnes maximum",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827160004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%204%20salle%20de%20formation&offset=0"
@@ -290,7 +297,8 @@
 								{
 									"Nom": "Ilôt (salle de formation)",
 									"Capacité": "3-5 personnes",
-									"Handiversité": "Non"
+									"Handiversité": "Non",
+									"Équipement": "Écran collaboratif"
 								},
 								"description": "3 personnes minimum, 5 personnes maximum",
 								"url_description": "https://scdi-montpellier.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=33MON_ALMA21340827110004231&context=L&vid=33UM_VU1&lang=fr_FR&search_scope=default_scope&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,%C3%8Elot%205%20salle%20de%20formation&offset=0"
