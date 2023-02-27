@@ -10,7 +10,7 @@ Les interactions entre l'application et Alma sont faites à travers l'API RESTfu
 
 ## Pré-requis :
 - Serveur Apache en HTTPS (testé sur CentOS v7.9 / Apache v2.4) avec module URLrewriting activé 
-- PHP v7.3 (non testé sur PHP v7.4+/8+)
+- PHP v8.1 (testé OK sur PHP v7.3/7.4+ et probablement OK sur PHP v8.2)
 - Serveur MariaDB v10.3 (non testé sur version supérieure)
 - 1 token Developer Network Exlibris pour utiliser l'API RESTful Alma Exlibris (https://developers.exlibrisgroup.com/ -> demander à exlibris d'associer votre compte developpeur à votre instance Alma, créer un token dans - Manage API Keys - pour l'application Alma avec les bons droits : Users/Bibs/Configurations - Read/write)
 
@@ -23,8 +23,8 @@ Les interactions entre l'application et Alma sont faites à travers l'API RESTfu
 - utilisation de PopperJS (testé en v1.16) (https://popper.js.org/)
 - utilisation de FontAwesome (testé en v4.7) (https://fontawesome.com/v4/icons/)
 #### PHP (installation locale) :
-- SimpleSAMLPHP (testé en v1.19) pour l'authentification via SAML (shibboleth) afin de récupérer l'identifiant de l'utilisateur dans Alma (https://simplesamlphp.org/) : un SP doit être installé et fonctionnel pour fonctionner avec l'application.
-- PHPMailer (testé en v6.0) : envoi de mail pour confirmer la réservation (https://github.com/PHPMailer/PHPMailer). Un serveur d'envoi de mail SMTP doit être disponible (sur port tcp/25 sans chiffrement et authentification).
+- SimpleSAMLPHP (testé en v1.19.7) pour l'authentification via SAML (shibboleth) afin de récupérer l'identifiant de l'utilisateur dans Alma (https://simplesamlphp.org/) : un SP doit être installé et fonctionnel pour fonctionner avec l'application.
+- PHPMailer (testé en v6.7.1) : envoi de mail pour confirmer la réservation (https://github.com/PHPMailer/PHPMailer). Un serveur d'envoi de mail SMTP doit être disponible (sur port tcp/25 sans chiffrement et authentification).
 
 ## Installation
 - Copier tous les fichiers de l'application dans le répertoire root d'apache
@@ -33,9 +33,9 @@ Les interactions entre l'application et Alma sont faites à travers l'API RESTfu
 - Copier vos logos en png dans le dossier /images -> Mettre des logos de taille comparable aux exemples fournis (les déclarer dans config.php comme selon exemple)
 - Téléchager PHPMailer et copier les fichiers dans un dossier /PHPMailer à la racine du site (nom dossier en dur dans le code)
 - Téléchager et installer SimpleSAMLPHP, configurer un SP dans l'application et tester que l'authentification fonctionne bien depuis l'interface SimpleSAMLPHP (il faut renseigner le chemin vers SimpleSAMLPHP et le nom du SP dans config.php. L'attribut eppn retourné par shibboleth doit être un identifiant utilisateur dans alma).
-- Configurer les notices de salles dans Alma (noter les mmsid, holdingid, itemid, code-barres de chaque salle). Attention : suite à un bug dans Alma, il faut mettre une seule salle par notice sinon on ne peut retrouver la salle d'une réservation faite depuis Alma dans l'application.
-- Configurer les BU et salles disponibles dans l'applications via le fichier JSON config_bu.json (voir exemple fourni) : ce fichier contient les BU et les salles accessibles, une url de description de la BU et des salles vers un site externe, une chemin vers une photo de la BU, la description des salles (en html), les horaires d'ouverture pour chaque jour de la semaine, les plannings spécifiques d'ouverture et fermeture (jour férié, BU fermées exceptionnellement...), les informations techniques pour faire le lien avec Alma (mmsid, holdingid, itemid, CB), une catégorie de salle (permettant de générer un filtre automatiquement)...
-- copier dans le dossier /images une photo des BU déclarées dans config_bu.json (nomenclature [attribut_id].png)
+- Configurer les notices de salles dans Alma (noter les mmsid, holdingid, itemid, code-barres de chaque salle). Il est préférable de mettre plusieurs salle par notice afin de d'accélérer la mise à jour de l'occupation des salle (1 seul appel API au lieu de 1 appel API par salle.
+- Configurer les BU et salles disponibles dans l'applications via le fichier JSON config_bu.json (voir exemple fourni) : ce fichier contient les BU et les salles accessibles, une url de description de la BU et des salles vers un site externe, une chemin vers une photo de la BU, la description des salles (en html), les horaires d'ouverture pour chaque jour de la semaine, les plannings spécifiques d'ouverture et fermeture (jour férié, BU fermées exceptionnellement...), les informations techniques pour faire le lien avec Alma (mmsid, holdingid, itemid, CB), un ou plusieurs filtres pour chaque salle...
+- copier dans le dossier /images une photo des BU déclarées dans config_bu.json (nomenclature : [attribut_id_de_la_BU].png)
 
 ## Notes
 - Application en français uniquement pour le moment
